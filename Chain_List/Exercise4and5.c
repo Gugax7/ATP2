@@ -32,6 +32,26 @@ void insereFinal(regFunc **L, int x, char str[]) {
     aux2->p = aux;
   }
 }
+
+void insereAfter(regFunc **L, int x, char str[], int previous){
+  regFunc *aux = (regFunc *)malloc(sizeof(regFunc));
+  strcpy(aux->nome,str);
+  aux->numMat = x;
+  regFunc *aux2;
+  aux2 = *L;
+  if(!aux2){
+    aux->p = *L;
+    *L = aux;
+    return;
+  }
+
+    while(aux2->numMat != previous && aux2->p != NULL){
+      aux2 = aux2->p;
+    }
+    aux->p = aux2->p;
+    aux2->p = aux;
+
+}
 void print_list(regFunc *L) {
   while (L) {
     printf("%d %s\n", L->numMat, L->nome);
@@ -48,5 +68,8 @@ int main() {
   	i++;
   }
 	print_list(list);
+
+  insereAfter(&list,15,"Elizabeth",7);
+  print_list(list);
 return 0;
 }
