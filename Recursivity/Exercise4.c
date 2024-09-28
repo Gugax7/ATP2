@@ -31,7 +31,7 @@ int powr(int number, int elevations){
 
 int main(){
 
-    printf("Result = %d", powr(24,4));
+    printf("Result = %d", powr(3,8));
 
     return 0;
 }
