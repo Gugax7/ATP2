@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+/*
 
 int result = 0;
 int current_elevation = 1;
@@ -28,10 +29,20 @@ int powr(int number, int elevations){
     }
 }
 
+*/
 
+int powr(int a, int e){
+    if(e == 0){
+        return 1;
+    }
+    if(e == 1){
+        return a;
+    }
+    return a*powr(a,e-1);
+}
 int main(){
 
-    printf("Result = %d", powr(24,4));
+    printf("Result = %d", powr(2,6));
 
     return 0;
 }
