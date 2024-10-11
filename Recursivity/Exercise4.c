@@ -42,7 +42,11 @@ int powr(int a, int e){
 }
 int main(){
 
+<<<<<<< HEAD
     printf("Result = %d", powr(2,6));
+=======
+    printf("Result = %d", powr(3,8));
+>>>>>>> 3547ea98f532b59df4f4c575d9d197f053c47435
 
     return 0;
 }
