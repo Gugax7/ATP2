@@ -102,8 +102,8 @@ int main() {
 
     fclose(file);
 
-    bubble_sort(arr,size);
-    //quick_sort(arr,0,size-1);
+    //bubble_sort(arr,size);
+    quick_sort(arr,0,size-1);
     //print_array(arr,SIZE);
 
     for (int i = 0; i < size; i++) {
