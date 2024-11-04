@@ -64,7 +64,7 @@ void print_array(int *array, int size){
 
 
 int main() {
-        clock_t start, end;
+    clock_t start, end;
     double cpu_time_used;
 
     // Start the clock
