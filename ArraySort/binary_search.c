@@ -3,7 +3,7 @@
 #include <time.h>
 #define SIZE 150000
 
-void binary_search(int array[],int array_size, int number){
+/*void binary_search(int array[],int array_size, int number){
     int mid = array_size / 2;
     int higher = array_size - 1, lower = 0;
     while(array[mid] != number && higher > lower && mid < array_size){
@@ -21,6 +21,26 @@ void binary_search(int array[],int array_size, int number){
     }
     else{
         printf("number not found!");
+    }
+}*/
+
+void binary_search(int array[], int lower, int higher, int number){
+    int mid = (lower + higher) / 2;
+    if(array[mid] == number){
+        printf("number found! (pos: %d)", mid);
+    }
+    else{
+        if(lower < higher){
+            if(array[mid] > number){
+                binary_search(array,lower,mid,number);
+            }
+            else{
+                binary_search(array,mid,higher,number);
+            }
+        }
+        else{
+            printf("number didnt found!");
+        }
     }
 }
 
@@ -63,7 +83,7 @@ int main() {
 
     fclose(file);
 
-    binary_search(arr,size,9999);
+    binary_search(arr,0,size-1,4619);
 
 
     // End the clock
