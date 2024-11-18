@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #define SIZE 100000
 #include <time.h>
+#include <math.h>
 
 void bubble_sort(int array[], int size){
     int has_trade = 1;
@@ -48,10 +49,8 @@ void quick_sort(int array[], int ini_lim, int las_lim)
                 array[lower_apex] = temp;
             }
         }
-        // printf("upper = %d, lower = %d, las_lim = %d, ini_lim = %d\n",upper_apex,lower_apex,las_lim,ini_lim);
-        // printf("quick_sort called***** (%d,%d)",ini_lim, lower_apex-1);
+
         quick_sort(array, ini_lim, lower_apex - 1);
-        // printf("quick_sort called (%d,%d)",lower_apex+1, las_lim);
         quick_sort(array, lower_apex + 1, las_lim);
     }
 }
@@ -59,6 +58,52 @@ void print_array(int *array, int size){
     for (int i = 0; i < size; i++)
     {
         printf("%d ", array[i]);
+    }
+}
+
+void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;
+
+        // Encontra o índice do menor elemento no subarray não ordenado
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+
+        // Troca o menor elemento encontrado com o primeiro elemento do subarray
+        if (minIndex != i) {
+            int temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
+        }
+    }
+}
+
+void shellSort(int arr[], int n) {
+    // Define o gap inicial usando a sequência de Knuth
+    int gap = 1;
+    while (gap < n / 3) {
+        gap = 3 * gap + 1;
+    }
+
+    // Executa o Shell Sort usando os gaps da sequência de Knuth
+    while (gap > 0) {
+        for (int i = gap; i < n; i++) {
+            int temp = arr[i];
+            int j;
+
+            // Move os elementos `gap` posições à frente para abrir espaço
+            for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
+                arr[j] = arr[j - gap];
+            }
+
+            // Coloca o elemento `temp` na posição correta
+            arr[j] = temp;
+        }
+        // Reduz o gap de acordo com a sequência de Knuth
+        gap = (gap - 1) / 3;
     }
 }
 
@@ -103,11 +148,15 @@ int main() {
     fclose(file);
 
     //bubble_sort(arr,size);
-    quick_sort(arr,0,size-1);
+    //quick_sort(arr,0,size-1);
+
+    shellSort(arr,size);
+
     //print_array(arr,SIZE);
 
     for (int i = 0; i < size; i++) {
         fprintf(outputFile, "%d\n", arr[i]);
+        //printf("%d\n", arr[i]);
     }
     fclose(outputFile);
 

@@ -46,6 +46,31 @@ void selection_sort(Aluno **L){
     }
 } 
 
+void inverte_list(Aluno **L, Aluno **who_starts){
+    int first_son = 0;
+    if(*L == NULL){printf("lista vazia"); return;}
+    if(*L == *who_starts) first_son = 1;
+    Aluno *aux = (*L)->p;
+    if(aux->p != NULL){
+        Aluno *humility = *who_starts;
+        inverte_list(&aux, who_starts);
+        if(first_son == 1){
+            aux->p = humility;
+            humility->p = NULL;
+        }
+        else{
+            aux->p = *L;
+        }
+    }else{
+        *who_starts = aux;
+        aux->p = *L;
+    }
+    
+    
+
+}
+
+
 /*void selection_sort(Aluno **L) {
     if (L == NULL || *L == NULL) return; // Check for an empty list
 
@@ -206,6 +231,22 @@ void insereAfter(Aluno *L, int mat, float nota, int before){
     }
 }
 
+struct Node* inverteListaRecursivo(struct Node* head) {
+    // Caso base: lista vazia ou com um único nó
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    // Chama a função recursivamente para o próximo nó
+    struct Node* novoHead = inverteListaRecursivo(head->next);
+
+    // Inverte a direção do ponteiro
+    head->next->next = head;
+    head->next = NULL;
+
+    return novoHead;
+}
+
 
 void print_list(Aluno *L){
     while(L){
@@ -232,6 +273,7 @@ int main(){
     insereFinal(&L,7,9);
     //insereAfter(L,4,6,3);
     selection_sort(&L);
+    inverte_list(&L,&L);
     print_list(L);
     return 0;
 }
